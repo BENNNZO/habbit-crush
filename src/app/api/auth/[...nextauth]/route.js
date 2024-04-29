@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 
-import dbConnect from "@/utils/dbConnect"
+import connectDB from "@/utils/connectDB"
 import User from "@/models/User"
 
 const handler = NextAuth({
@@ -13,12 +13,12 @@ const handler = NextAuth({
         }),
     ],
     pages: {
-        signIn: '/auth/signIn'
+        signIn: '/auth/sign-in'
     },
     callbacks: {
         async session({ session }) {
             try {
-                await dbConnect()
+                await connectDB()
 
                 const sessionUser = await User.findOne({ email: session.user.email })
 
@@ -33,7 +33,7 @@ const handler = NextAuth({
         async signIn({ profile }) {
             console.log(profile)
             try {
-                await dbConnect()
+                await connectDB()
 
                 const userExists = await User.findOne({ email: profile.email })
 

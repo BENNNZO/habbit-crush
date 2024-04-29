@@ -1,4 +1,5 @@
 import NavBar from "@/components/NavBar";
+import SessionContext from "@/utils/SessionContext";
 
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -14,8 +15,10 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={`bg-background text-text min-h-screen ${poppins.className}`}>
-				<NavBar />
-				{children}
+				<SessionContext>
+					<NavBar />
+					{children}
+				</SessionContext>
 			</body>
 		</html>
 	);
