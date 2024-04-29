@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 export default function NavBar() {
     return (
         <nav className="fixed w-screen h-16 p-2 flex flex-row justify-between">
