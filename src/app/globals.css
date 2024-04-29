@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button {
+    @apply bg-secondary px-4 py-2 font-semibold rounded-md shadow-md hover:bg-accent duration-100
+}
+
+.button-secondary {
+    @apply bg-accent px-4 py-2 font-semibold rounded-md shadow-md hover:bg-white hover:text-secondary duration-100
+}
