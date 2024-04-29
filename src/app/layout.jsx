@@ -1,4 +1,5 @@
 import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 import SessionContext from "@/utils/SessionContext";
 
 import { Poppins } from "next/font/google";
@@ -13,11 +14,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en">
+		<html lang="en" className="scroll-smooth">
 			<body className={`bg-background text-text min-h-screen ${poppins.className}`}>
 				<SessionContext>
 					<NavBar />
 					{children}
+					<Footer />
 				</SessionContext>
 			</body>
 		</html>

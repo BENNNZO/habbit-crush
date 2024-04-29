@@ -9,3 +9,7 @@
 .button-secondary {
     @apply bg-accent px-4 py-2 font-semibold rounded-md shadow-md hover:bg-white hover:text-secondary duration-100
 }
+
+.card-container {
+    @apply bg-secondary/50 rounded-md shadow-md px-6 py-4 max-w-96 relative
+}
