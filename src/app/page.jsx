@@ -4,12 +4,18 @@ import WhatWeProvide from "@/components/WhatWeProvide";
 import OurGoals from "@/components/OurGoals";
 
 export default function Home() {
+	const line = <div className="h-px w-full bg-gradient-to-r from-transparent via-secondary/35 to-transparent"></div>
+
 	return (
-		<main className="max-w-screen-md mx-auto">
+		<main className="max-w-screen-md mx-auto text-text">
 			<Hero />
+			{line}
 			<HowItWorks />
+			{line}
 			<WhatWeProvide />
+			{line}
 			<OurGoals />
+			{line}
 		</main>
 	);
 }

@@ -13,12 +13,8 @@ export default function NavBar() {
     const [account, setAccount] = useState(false)
     const [rotation, setRotation] = useState(0)
 
-    // useEffect(() => {
-    //     console.log(session)
-    // }, [session])
-
     return (
-        <nav className="fixed w-screen h-16 p-2 flex flex-row justify-between items-center">
+        <nav className="fixed w-screen h-16 p-2 flex flex-row justify-between items-center bg-background border-b border-secondary/20">
             <img src={Logo.src} alt="logo click to go home" className="h-10 cursor-pointer duration-300" style={{ rotate: `${rotation}deg` }} onClick={() => {push('/'); setRotation(e => e + 360)}} />
             <ul className="flex flex-row gap-2 items-center mx-1">
                 {
@@ -60,7 +56,6 @@ export default function NavBar() {
                     )
                 }
             </ul>
-
         </nav>
     )
 }
