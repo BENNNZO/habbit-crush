@@ -1,3 +1,5 @@
+'use client'
+
 import HabbitList from "@/components/dashboard/HabbitList"
 
 export default function Dashboard() {
