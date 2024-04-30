@@ -1,8 +1,8 @@
-import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
-import WhatWeProvide from "@/components/WhatWeProvide";
-import OurGoals from "@/components/OurGoals";
-import Showcase from "@/components/Showcase";
+import Hero from "@/components/home/Hero";
+import HowItWorks from "@/components/home/HowItWorks";
+import WhatWeProvide from "@/components/home/WhatWeProvide";
+import OurGoals from "@/components/home/OurGoals";
+import Showcase from "@/components/home/Showcase";
 
 export default function Home() {
 	const line = <div className="h-px w-full bg-gradient-to-r from-transparent via-secondary/35 to-transparent"></div>

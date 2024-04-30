@@ -1,5 +1,5 @@
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
+import NavBar from "@/components/global/NavBar";
+import Footer from "@/components/global/Footer";
 import SessionContext from "@/utils/SessionContext";
 
 import { Poppins } from "next/font/google";
