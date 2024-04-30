@@ -14,13 +14,16 @@ export default function NavBar() {
     const [rotation, setRotation] = useState(0)
 
     return (
-        <nav className="fixed w-screen h-16 p-2 flex flex-row justify-between items-center bg-background border-b border-secondary/20">
+        <nav className="fixed w-screen h-16 p-2 flex flex-row justify-between items-center">
             <img src={Logo.src} alt="logo click to go home" className="h-10 cursor-pointer duration-300" style={{ rotate: `${rotation}deg` }} onClick={() => {push('/'); setRotation(e => e + 360)}} />
             <ul className="flex flex-row gap-2 items-center mx-1">
                 {
                     session ? (
                         <>
                             <li className="button">
+                                <button onClick={() => push('/add-habbit')}>ADD HABBIT</button>
+                            </li>
+                            <li className="button-secondary">
                                 <button onClick={() => push('/dashboard')}>DASHBOARD</button>
                             </li>
                             <li className="relative" onClick={() => setAccount(e => !e)}>
