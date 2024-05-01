@@ -4,49 +4,21 @@ import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import axios from "axios"
 
-import HabbitCheck from "./HabbitCheck"
+import HabbitCheck from "@/components/dashboard/HabbitCheck"
 import PlusIcon from "@/assets/svg/plus.svg"
 
 export default function HabbitList(props) {
     const [habbitData, setHabbitData] = useState(null)
+
     const searchParams = useSearchParams()
 
-    const sampleData = [
-        {
-            "title": "nails",
-            "last_check": Date.now() - (Math.random() * 100000000),
-            "streak": Math.round(Math.random() * 100)
-        },
-        {
-            "title": "smoKing",
-            "last_check": Date.now() - (Math.random() * 100000000),
-            "streak": Math.round(Math.random() * 100)
-        },
-        {
-            "title": "ALCohol",
-            "last_check": Date.now() - (Math.random() * 100000000),
-            "streak": Math.round(Math.random() * 100)
-        },
-        {
-            "title": "brush TeEth asdasdasd",
-            "last_check": Date.now() - (Math.random() * 100000000),
-            "streak": Math.round(Math.random() * 100)
-        }
-    ]
-
     useEffect(() => {
-        console.log("hello, world!")
-        // axios.post(`/api/user/${searchParams.get('id')}/habbits`, {
-        //     "title": "test",
-        //     "type": true
-        // })
-        // .then(res => {
-        //     console.log(res)
-        // })
-        // .catch(err => console.log(err))
+        axios.get(`/api/user/${searchParams.get('id')}/habbit`)
+        .then(res => {
+            setHabbitData(res.data.habbits)
+        })
+        .catch(err => console.log(err))
     }, [])
-
-    
 
     return (
         <section className="flex flex-col gap-2 w-64">

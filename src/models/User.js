@@ -7,7 +7,7 @@ const UserSchema = new Schema({
     coins: { type: Number, default: 0 },
     habbits: [{ 
         type: Schema.Types.ObjectId, 
-        ref: 'habbit' 
+        ref: 'Habbit' 
     }],
     todo: [{
         title: String,

@@ -15,11 +15,8 @@ export default function HabbitAddModal(props) {
 
     function submitHabbit(e) {
         e.preventDefault()
-
         setCreating(true)
 
-        console.log(habbitTitleRef.current.value)
-        console.log(habbitTypeRef.current.checked)
         axios.post(`/api/user/${searchParams.get('id')}/habbit`, {
             title: habbitTitleRef.current.value,
             type: habbitTypeRef.current.checked

@@ -5,10 +5,13 @@ import Habbit from "@/models/Habbit"
 
 export async function GET(req, { params }) {
     try {
-        const {} = params
+        const { user_id } = params
 
-        return new Response(JSON.stringify(), { status: 200 })
+        const userRes = await User.findById(user_id).populate('habbits').select('habbits')
+
+        return new Response(JSON.stringify(userRes), { status: 200 })
     } catch (err) {
+        console.log(err)
         return new Response(err, { status: 500 })
     }
 }
@@ -37,6 +40,7 @@ export async function PATCH(req, { params }) { // update set of fields and not e
         
         return new Response(JSON.stringify(), { status: 200 })
     } catch (err) {
+        console.log(err)
         return new Response(err, { status: 500 })
     }
 }
