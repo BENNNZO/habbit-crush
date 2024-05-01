@@ -7,4 +7,4 @@ const HabbitSchema = new Schema({
     type: Boolean
 })
 
-export default models.User || model("Habbit", HabbitSchema)
+export default models.Habbit || model("Habbit", HabbitSchema)

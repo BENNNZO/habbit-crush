@@ -13,3 +13,7 @@
 .card-container {
     @apply bg-secondary/50 rounded-md shadow-md px-6 py-4 max-w-96 relative
 }
+
+.absolute-center { 
+    @apply absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2
+}

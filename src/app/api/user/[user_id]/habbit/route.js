@@ -20,38 +20,18 @@ export async function POST(req, { params }) { // new
         const { user_id } = params
         const { title, type } = await req.json()
 
-        // create habbit
         const habbitRes = await Habbit.create({ title, type })
-        // push habbit id to user
 
-        return new Response(JSON.stringify(habbitRes), { status: 200 })
+        const userRes = await User.findOneAndUpdate({ _id: user_id }, { $addToSet: { habbits: habbitRes._id } })
+
+        return new Response(JSON.stringify({ habbitRes, userRes }), { status: 200 })
     } catch (err) {
         console.log(err)
         return new Response(err, { status: 500 })
     }
 }
 
-export async function PUT(req, { params }) { // modify entire entry
-    try {
-        const {} = params
-        
-        return new Response(JSON.stringify(), { status: 200 })
-    } catch (err) {
-        return new Response(err, { status: 500 })
-    }
-}
-
 export async function PATCH(req, { params }) { // update set of fields and not entire entry
-    try {
-        const {} = params
-        
-        return new Response(JSON.stringify(), { status: 200 })
-    } catch (err) {
-        return new Response(err, { status: 500 })
-    }
-}
-
-export async function DELETE(req, { params }) {
     try {
         const {} = params
         
