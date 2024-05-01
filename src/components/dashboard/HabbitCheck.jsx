@@ -66,7 +66,7 @@ export default function HabbitCheck(props) {
     return (
         <section className="flex flex-col gap-2 items-start bg-secondary p-3 rounded-md shadow-lg">
             <div className="flex flex-row justify-between w-full items-center gap-5">
-                <p className="font-bold leading-3 shadow-md">{title[0].toUpperCase() + title.substr(1).toLowerCase()}</p>
+                <p className="font-bold drop-shadow-md whitespace-nowrap overflow-hidden overflow-ellipsis">{title[0].toUpperCase() + title.substr(1).toLowerCase()}</p>
                 <button ref={location} className={`p-3 rounded-md ${checked ? 'text-green-900 bg-green-500' : 'text-black bg-white'} font-bold relative shadow-md`} onClick={() => check()}>
                     {checked ? (
                         <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">✓</p>

@@ -24,7 +24,7 @@ export default function NavBar() {
                                 <button onClick={() => push('/add-habbit')}>ADD HABBIT</button>
                             </li>
                             <li className="button-secondary">
-                                <button onClick={() => push('/dashboard')}>DASHBOARD</button>
+                                <button onClick={() => push(`/dashboard?id=${session?.user.id}`)}>DASHBOARD</button>
                             </li>
                             <li className="relative" onClick={() => setAccount(e => !e)}>
                                 <img className="h-10 cursor-pointer rounded-md" src={session?.user.image} />

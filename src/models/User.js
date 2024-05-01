@@ -4,8 +4,15 @@ const UserSchema = new Schema({
     username: String,
     email: String,
     picture: String,
-    coins: Number,
-    habbits: [{ type: Schema.Types.ObjectId, ref: 'habbit' }]
+    coins: { type: Number, default: 0 },
+    habbits: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'habbit' 
+    }],
+    todo: [{
+        title: String,
+        desc: String
+    }]
 
 })
 
