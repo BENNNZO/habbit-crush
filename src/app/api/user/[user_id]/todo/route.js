@@ -18,7 +18,7 @@ export async function GET(req, { params }) {
     }
 }
 
-export async function POST(req, { params }) { // new
+export async function POST(req, { params }) {
     try {
         await dbConnect()
 
@@ -30,19 +30,6 @@ export async function POST(req, { params }) { // new
         const userRes = await User.findOneAndUpdate({ _id: user_id }, { $addToSet: { todos: todoRes._id } })
 
         return new Response(JSON.stringify({ todoRes, userRes }), { status: 200 })
-    } catch (err) {
-        console.log(err)
-        return new Response(err, { status: 500 })
-    }
-}
-
-export async function PATCH(req, { params }) { // update set of fields and not entire entry
-    try {
-        await dbConnect()
-
-        const {} = params
-        
-        return new Response(JSON.stringify(), { status: 200 })
     } catch (err) {
         console.log(err)
         return new Response(err, { status: 500 })

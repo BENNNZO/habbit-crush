@@ -1,13 +1,19 @@
 'use client'
 
 import { useState, useEffect, useRef } from "react"
+import { useSearchParams } from "next/navigation"
 import moment from "moment"
+import axios from "axios"
 
 import FlameIcon from '@/assets/svg/flame.svg'
 import Checkmark from '@/assets/svg/checkmark.svg'
 import confetti from "canvas-confetti"
 
+// TODO: add delete button to habbits & todo
+
 export default function HabbitCheck(props) {
+    const searchParams = useSearchParams()
+    
     // const [duration, setDuration] = useState(moment.duration(Date.now() - last_check).asDays())
     const [checked, setChecked] = useState(false)
     
@@ -55,9 +61,19 @@ export default function HabbitCheck(props) {
     }
 
     function check() {
-        if (!checked) {
-            fireConfetti()
-            setChecked(true)
+        if (props.type === "habbit") {
+            if (!checked) {
+                fireConfetti()
+                setChecked(true)
+            }
+        } else if (props.type === "todo") {
+            axios.delete(`/api/user/${searchParams.get('id')}/todo/${props.data._id}`)
+            .then(res => {
+                console.log(res)
+                fireConfetti()
+                setChecked(true)
+            })
+            .catch(err => console.log(err))
         }
     }
 
