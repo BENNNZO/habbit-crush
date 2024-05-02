@@ -66,13 +66,27 @@ export default function TaskItem(props) {
             if (!checked) {
                 fireConfetti()
                 setChecked(true)
-                props.reload()
+                
+                axios.patch(`/api/user/${searchParams.get('id')}/habbit/${props.data._id}`, {
+                    last_checked: Date.now(),
+                    streak: props.data.streak + 1
+                })
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => console.log(err))
+                .finally(() => {
+                    props.reload()
+                })
             }
         } else if (props.type === "todo") {
             fireConfetti()
             setChecked(true)
             axios.delete(`/api/user/${searchParams.get('id')}/todo/${props.data._id}`)
             .catch(err => console.log(err))
+            .finally(() => {
+                props.reload()
+            })
         }
     }
 

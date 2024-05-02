@@ -36,7 +36,7 @@ export default function Dashboard() {
         <main className="pt-32 flex flex-col items-center gap-12 min-h-screen w-screen">
             <h1 className="font-bold text-6xl">DAHSBOARD</h1>
             <div className="flex flex-row gap-8">
-                <TaskLists data={{ habbitData, todoData }} setModalState={(e) => setModalState(e)} />
+                <TaskLists reload={() => loadData()} data={{ habbitData, todoData }} setModalState={(e) => setModalState(e)} />
                 {modalState ? ( <TaskModal reload={() => loadData()} setModalState={(e) => setModalState(e)} /> ) : ""}
             </div>
         </main>

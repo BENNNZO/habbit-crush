@@ -4,21 +4,6 @@ import TaskItem from "@/components/dashboard/TaskItem"
 import PlusIcon from "@/assets/svg/plus.svg"
 
 export default function TaskLists(props) {
-    let titles = [
-        {
-            title: "Good Habbits",
-            type: "habbit"
-        },
-        {
-            title: "Good Habbits",
-            type: "habbit"
-        },
-        {
-            title: "Good Habbits",
-            type: "habbit"
-        }
-    ]
-
     function title(title) { 
         return (
             <div className="flex flex-row w-full items-center justify-between gap-2">
@@ -41,7 +26,7 @@ export default function TaskLists(props) {
                         {title("Good Habbits")}
                         {props.data.habbitData?.map((e, i) => {
                             if (e.type) {
-                                return <TaskItem data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                                return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
                             }
                         })}
                     </div>
@@ -49,7 +34,7 @@ export default function TaskLists(props) {
                         {title("Bad Habbits")}
                         {props.data.habbitData?.map((e, i) => {
                             if (!e.type) {
-                                return <TaskItem data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                                return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
                             }
                         })}
                     </div>
@@ -57,7 +42,7 @@ export default function TaskLists(props) {
                         {title("Todo List")}
                         {props.data.todoData?.map((e, i) => {
                             if (!e.type) {
-                                return <TaskItem data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                                return <TaskItem reload={() => props.reload()} data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} />
                             }
                         })}
                     </div>

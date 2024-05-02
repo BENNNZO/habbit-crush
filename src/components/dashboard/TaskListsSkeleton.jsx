@@ -1,4 +1,3 @@
-import TaskItem from "@/components/dashboard/TaskItem"
 import PlusIcon from "@/assets/svg/plus.svg"
 
 export default function TaskListsSkeleton() {
