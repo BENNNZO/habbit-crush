@@ -8,7 +8,7 @@ export default function TaskLists(props) {
         return (
             <div className="flex flex-row w-full items-center justify-between gap-2">
                 <h2 className="font-bold bg-accent h-8 py-1 px-2 rounded-md w-full">{title}</h2>
-                <button className="h-8 aspect-square bg-accent rounded-md p-2 hover:bg-primary duration-100" onClick={() => props.setModalState(true)}>
+                <button className="h-8 aspect-square bg-accent rounded-md p-2 hover:bg-primary duration-100" onClick={() => props.setModalNewState(true)}>
                     <img src={PlusIcon.src} alt="" />
                 </button>
             </div>
@@ -26,7 +26,7 @@ export default function TaskLists(props) {
                         {title("Good Habbits")}
                         {props.data.habbitData?.map((e, i) => {
                             if (e.type) {
-                                return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                                return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
                             }
                         })}
                     </div>
@@ -34,7 +34,7 @@ export default function TaskLists(props) {
                         {title("Bad Habbits")}
                         {props.data.habbitData?.map((e, i) => {
                             if (!e.type) {
-                                return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                                return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
                             }
                         })}
                     </div>
@@ -42,7 +42,7 @@ export default function TaskLists(props) {
                         {title("Todo List")}
                         {props.data.todoData?.map((e, i) => {
                             if (!e.type) {
-                                return <TaskItem reload={() => props.reload()} data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                                return <TaskItem reload={() => props.reload()} data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
                             }
                         })}
                     </div>

@@ -5,10 +5,12 @@ import { useSearchParams } from "next/navigation"
 import axios from "axios"
 
 import TaskLists from "@/components/dashboard/TaskLists"
-import TaskModal from "@/components/dashboard/TaskModal"
+import TaskModalNew from "@/components/dashboard/TaskModalNew"
+import TaskModalEdit from "@/components/dashboard/TaskModalEdit"
 
 export default function Dashboard() {
-    const [modalState, setModalState] = useState(false)
+    const [modalNewState, setModalNewState] = useState(false)
+    const [modalEditState, setModalEditState] = useState(false)
     const [habbitData, setHabbitData] = useState(null)
     const [todoData, setTodoData] = useState(null)
 
@@ -36,8 +38,11 @@ export default function Dashboard() {
         <main className="pt-32 flex flex-col items-center gap-12 min-h-screen w-screen">
             <h1 className="font-bold text-6xl">DAHSBOARD</h1>
             <div className="flex flex-row gap-8">
-                <TaskLists reload={() => loadData()} data={{ habbitData, todoData }} setModalState={(e) => setModalState(e)} />
-                {modalState ? ( <TaskModal reload={() => loadData()} setModalState={(e) => setModalState(e)} /> ) : ""}
+                
+                {/* this whole system of todos and habbits has been a pain and is some of my worst code but it works and thats all that matters :) */}
+                <TaskLists reload={() => loadData()} data={{ habbitData, todoData }} setModalNewState={(e) => setModalNewState(e)} setModalEditState={(e) => setModalEditState(e)} />
+                {modalNewState ? ( <TaskModalNew reload={() => loadData()} setModalNewState={(e) => setModalNewState(e)} /> ) : ""}
+                {modalEditState ? ( <TaskModalEdit reload={() => loadData()} setModalEditState={(e) => setModalEditState(e)} editState={modalEditState} /> ) : ""}
             </div>
         </main>
     )
