@@ -69,7 +69,7 @@ export default function TaskItem(props) {
         if (props.type === "habbit") {
             if (!checked) {
                 fireConfetti()
-                setTodoCheck(true)
+                setChecked(true)
 
                 axios.patch(`/api/user/${searchParams.get("id")}/habbit/${props.data._id}`, {
                     last_checked: Date.now(),
@@ -83,7 +83,7 @@ export default function TaskItem(props) {
             }
         } else if (props.type === "todo") {
             fireConfetti()
-            setChecked(true)
+            setTodoCheck(true)
             axios.delete(`/api/user/${searchParams.get("id")}/todo/${props.data._id}`)
             .catch(err => console.log(err))
             .finally(() => {
@@ -107,8 +107,7 @@ export default function TaskItem(props) {
     }, [props])
 
     useEffect(() => {
-        console.log(last_checked_diff)
-        if (last_checked_diff > 1) {
+        if (last_checked_diff > 1 && props.type === "habbit") {
             axios.patch(`/api/user/${searchParams.get("id")}/habbit/${props.data._id}`, {
                 last_checked: props.data.last_check,
                 streak: 0
@@ -125,7 +124,8 @@ export default function TaskItem(props) {
     }, [props.data.title])
 
     return (
-        <div className={`${props.type === "todo" && todoCheck === true ? "hidden" : "flex"} flex-col ${props.data.desc === "" ? "" : "gap-2"} bg-secondary p-3 rounded-md shadow-lg fade-in`}>
+        // <div className={`${props.type === "todo" && todoCheck === true ? "hidden" : "flex"} flex-col ${props.data.desc === "" ? "" : "gap-2"} bg-secondary p-3 rounded-md shadow-lg fade-in`}>
+        <div className={`flex flex-col ${props.data.desc === "" ? "" : "gap-2"} bg-secondary p-3 rounded-md shadow-lg fade-in`}>
             <div className="flex flex-row justify-between w-full items-center gap-5">
                 <div className="flex flex-row gap-2 items-center w-4/5 relative">
                     <img className="h-6 invert p-1 bg-black/20 rounded-md cursor-pointer hover:bg-black/30 duration-100" src={PencilIcon.src} alt="flame icon" onClick={() => setEditDropdownState(e => !e)} />
