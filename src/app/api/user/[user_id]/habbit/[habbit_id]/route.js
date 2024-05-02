@@ -13,10 +13,10 @@ export async function GET(req, { params }) {
 
 export async function PATCH(req, { params }) {
     try {
-        const { last_checked, streak } = await req.json()
+        const { last_checked, streak, coins } = await req.json()
         const { habbit_id } = params
         
-        const res = await Habbit.findOneAndUpdate({ _id: habbit_id }, { last_check: new Date(last_checked), streak })
+        const res = await Habbit.findOneAndUpdate({ _id: habbit_id }, { last_check: new Date(last_checked), streak, coins })
 
         return new Response(JSON.stringify(res), { status: 200 })
     } catch (err) {

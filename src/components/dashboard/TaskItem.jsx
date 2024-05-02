@@ -70,7 +70,8 @@ export default function TaskItem(props) {
 
                 axios.patch(`/api/user/${searchParams.get("id")}/habbit/${props.data._id}`, {
                     last_checked: Date.now(),
-                    streak: props.data.streak + 1
+                    streak: props.data.streak + 1,
+                    coins: props.data.streak + 1 > props.data.coins ? props.data.streak + 1 : props.data.coins
                 })
                 .catch(err => console.log(err))
                 .finally(() => {
@@ -124,8 +125,11 @@ export default function TaskItem(props) {
             {props.data.desc === "" ? "" : <div className="w-full h-px bg-white/20 my-1"></div>}
             {props.type === "habbit" ? (
                 <div className="flex flex-row gap-5 items-center justify-between w-full">
-                    <div className={`px-2 py-1 bg-green-500 text-green-900 font-semibold rounded-md shadow-md`}>100 Days</div>
-                        <img className="h-6" src={DiamondIcon.src} alt="flame icon" />
+                    <div className={`flex flex-row ${props.data.streak === 0 ? "bg-zinc-500 text-zinc-900" : "bg-sky-500 text-sky-900"} px-2 py-1 rounded-md font-semibold items-center justify-center shadow-md duration-300`}>
+                        <img className={`h-6 mr-2`} src={DiamondIcon.src} alt="flame icon" />
+                        {/* <img className={`h-6 duration-300 ${props.data.streak === 0 ? "grayscale" : ""}`} src={FlameIcon.src} alt="flame icon" /> */}
+                        <p>{props.data.coins}</p>
+                    </div>
                     <div className={`flex flex-row ${props.data.streak === 0 ? "bg-zinc-500 text-zinc-900" : "bg-orange-500 text-orange-900"} px-2 py-1 rounded-md font-semibold items-center justify-center shadow-md duration-300`}>
                         <img className={`h-6 duration-300 ${props.data.streak === 0 ? "grayscale" : ""}`} src={FlameIcon.src} alt="flame icon" />
                         <p>{props.data.streak}</p>
