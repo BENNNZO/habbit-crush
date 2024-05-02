@@ -67,18 +67,18 @@ export default function HabbitCheck(props) {
                 setChecked(true)
             }
         } else if (props.type === "todo") {
+            fireConfetti()
+            setChecked(true)
             axios.delete(`/api/user/${searchParams.get('id')}/todo/${props.data._id}`)
             .then(res => {
-                console.log(res)
-                fireConfetti()
-                setChecked(true)
+
             })
             .catch(err => console.log(err))
         }
     }
 
     return (
-        <section className="flex flex-col gap-2 items-start bg-secondary p-3 rounded-md shadow-lg">
+        <div className={`${props.type === "todo" && checked === true ? "hidden" : "flex"} flex-col gap-2 items-start bg-secondary p-3 rounded-md shadow-lg`}>
             <div className="flex flex-row justify-between w-full items-center gap-5">
                 <p className="font-bold drop-shadow-md whitespace-nowrap overflow-hidden overflow-ellipsis">{props.data.title[0].toUpperCase() + props.data.title.substr(1).toLowerCase()}</p>
                 <button ref={location} className={`p-3 rounded-md ${checked ? 'text-green-900 bg-green-500' : 'text-black bg-white'} font-bold relative shadow-md`} onClick={() => check()}>
@@ -101,6 +101,6 @@ export default function HabbitCheck(props) {
             ) : (
                 <div>hello, world!</div>
             )}
-        </section>
+        </div>
     )
 }
