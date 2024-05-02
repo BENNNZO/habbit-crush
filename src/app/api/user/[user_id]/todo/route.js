@@ -9,7 +9,7 @@ export async function GET(req, { params }) {
 
         const { user_id } = params
 
-        const userRes = await User.findById(user_id).populate('habbits').select('habbits')
+        const userRes = await User.findById(user_id).populate('todos').select('todos')
 
         return new Response(JSON.stringify(userRes), { status: 200 })
     } catch (err) {
@@ -23,13 +23,13 @@ export async function POST(req, { params }) { // new
         await dbConnect()
 
         const { user_id } = params
-        const { title, type } = await req.json()
+        const { title, desc } = await req.json()
 
-        const habbitRes = await Habbit.create({ title, type })
+        const todoRes = await Todo.create({ title, desc })
 
-        const userRes = await User.findOneAndUpdate({ _id: user_id }, { $addToSet: { habbits: habbitRes._id } })
+        const userRes = await User.findOneAndUpdate({ _id: user_id }, { $addToSet: { todos: todoRes._id } })
 
-        return new Response(JSON.stringify({ habbitRes, userRes }), { status: 200 })
+        return new Response(JSON.stringify({ todoRes, userRes }), { status: 200 })
     } catch (err) {
         console.log(err)
         return new Response(err, { status: 500 })

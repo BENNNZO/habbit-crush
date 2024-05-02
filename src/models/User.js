@@ -9,9 +9,9 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'Habbit' 
     }],
-    todo: [{
-        title: String,
-        desc: String
+    todos: [{
+        type: Schema.Types.ObjectId, 
+        ref: 'Todo'
     }]
 
 })
