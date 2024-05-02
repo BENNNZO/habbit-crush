@@ -4,6 +4,12 @@
 - ~~polish tasks~~
 - ~~add todo modal~~
 - ~~add todo model (link to user)~~
+- add edit api endpoints
+- apply edit function and axios calls to buttons
+- add total streak and diamond counters somehwere on screen
+- add streak counter to scheama
+- add daily claim button
+
 
 ## random ideas
 - possible app that not only help break habbits but helps create new ones
