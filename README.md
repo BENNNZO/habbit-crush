@@ -1,5 +1,10 @@
 # things todo file
 
+## todo
+- polish tasks
+- add todo modal
+- add todo model (link to user)
+
 ## random ideas
 - possible app that not only help break habbits but helps create new ones
     - todo app built in (paid)
@@ -9,11 +14,10 @@
 
 ## things i need
 - sso
-- hero 
+- ~~hero~~
 - pricing
-- free trial
 - breaking happits is satisfying
-    - confetti
+    - ~~confetti~~
     - sounds
     - side quests
         - idle type
