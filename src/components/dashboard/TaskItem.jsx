@@ -16,7 +16,7 @@ import PencilIcon from '@/assets/svg/pencil.svg'
 export default function TaskItem(props) {
     const searchParams = useSearchParams()
     
-    let last_checked_diff = moment(Date.now()).diff(new Date(props.data.last_check), "days")
+    let last_checked_diff = moment(props.data.last_check).diff(Date.now(), "days")
     const [checked, setChecked] = useState(last_checked_diff === 0 ? true : false)
     
     const location = useRef(null)
@@ -93,6 +93,20 @@ export default function TaskItem(props) {
     useEffect(() => {
         // this is stupid but it fixes many state caryover issues
     }, [props])
+
+    useEffect(() => {
+        console.log(last_checked_diff)
+        if (last_checked_diff > 1) {
+            axios.patch(`/api/user/${searchParams.get('id')}/habbit/${props.data._id}`, {
+                last_checked: props.data.last_check,
+                streak: 0
+            })
+            .catch(err => console.log(err))
+            .finally(() => {
+                props.reload()
+            })
+        }
+    }, [])
 
     return (
         <div className={`${props.type === "todo" && checked === true ? "hidden" : "flex"} flex-col ${props.data.desc === "" ? "" : "gap-2"} bg-secondary p-3 rounded-md shadow-lg fade-in`}>
