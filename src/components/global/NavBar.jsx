@@ -27,7 +27,7 @@ export default function NavBar() {
                                 <button onClick={() => push(`/dashboard?id=${session?.user.id}`)}>DASHBOARD</button>
                             </li>
                             <li className="relative" onClick={() => setAccount(e => !e)}>
-                                <img className="h-10 cursor-pointer rounded-md" src={session?.user.image} />
+                                <img className="h-10 aspect-square cursor-pointer rounded-md leading-4" src={session?.user.image} alt="prof pic" />
                                 {
                                     account ? (
                                         <>
