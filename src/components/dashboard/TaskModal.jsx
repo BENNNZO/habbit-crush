@@ -7,7 +7,7 @@ import axios from "axios"
 import Loader from '@/assets/svg/loader2.svg'
 
 export default function TaskModal(props) {
-    const [creating, setCreating] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [toggleType, setToggleType] = useState(true)
     
     const searchParams = useSearchParams()
@@ -19,7 +19,7 @@ export default function TaskModal(props) {
 
     function submitHabbit(e) {
         e.preventDefault()
-        setCreating(true)
+        setLoading(true)
 
         axios.post(`/api/user/${searchParams.get('id')}/habbit`, {
             title: habbitTitleRef.current.value,
@@ -27,14 +27,15 @@ export default function TaskModal(props) {
         })
         .then(res => {
             console.log(res)
-            props.setToggle(false)
+            props.setModalState(false)
+            props.reload()
         })
         .catch(err => console.log(err))
     }
 
     function submitTodo(e) {
         e.preventDefault()
-        setCreating(true)
+        setLoading(true)
 
         axios.post(`/api/user/${searchParams.get('id')}/todo`, {
             title: todoTitleRef.current.value,
@@ -42,7 +43,8 @@ export default function TaskModal(props) {
         })
         .then(res => {
             console.log(res)
-            props.setToggle(false)
+            props.setModalState(false)
+            props.reload()
         })
         .catch(err => console.log(err))
     }
@@ -52,7 +54,7 @@ export default function TaskModal(props) {
             <div className="bg-accent shadow-md p-2 rounded-md overflow-hidden">
                 <div className="flex flex-row items-center justify-between">
                     <h3 className="font-bold tracking-wide text-xl bg-secondary/50 px-2 rounded-md">CREATE NEW TASK</h3>
-                    <button className="bg-secondary/50 p-3 rounded-md shadow-md aspect-square relative" onClick={() => props.setToggle(false)}>
+                    <button className="bg-secondary/50 p-3 rounded-md shadow-md aspect-square relative" onClick={() => props.setModalState(false)}>
                         <div className="absolute-center w-0.5 h-4 rotate-45 bg-white rounded-full"></div>
                         <div className="absolute-center w-0.5 h-4 -rotate-45 bg-white rounded-full"></div>
                     </button>
@@ -76,7 +78,7 @@ export default function TaskModal(props) {
                             </div>
                         </fieldset>
                         <button type="submit" className="button relative h-8">{
-                            creating ? (
+                            loading ? (
                                 <img className="absolute-center w-6" src={Loader.src} alt="loading" />
                             ) : (
                                 <p className="absolute-center">CREATE</p>
@@ -87,7 +89,7 @@ export default function TaskModal(props) {
                         <input className="rounded-md px-2 text-black" type="text" name="habbit" id="habbit-title" ref={todoTitleRef} placeholder="Title..." required/>
                         <textarea name="todo" id="todo-desc" rows="2" ref={todoDescRef} placeholder="Description... (optional)" className="px-2 rounded-md resize-none text-black"></textarea>
                         <button type="submit" className="button relative h-8">{
-                            creating ? (
+                            loading ? (
                                 <img className="absolute-center w-6" src={Loader.src} alt="loading" />
                             ) : (
                                 <p className="absolute-center">CREATE</p>
