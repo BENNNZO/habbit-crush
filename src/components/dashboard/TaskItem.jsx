@@ -16,7 +16,7 @@ import PencilIcon from "@/assets/svg/pencil.svg"
 export default function TaskItem(props) {
     const searchParams = useSearchParams()
     
-    let last_checked_diff = moment(props.data.last_check).diff(Date.now(), "days")
+    let last_checked_diff = moment(Date.now()).diff(new Date(props.data.last_check), "days")
     const [checked, setChecked] = useState(last_checked_diff === 0 ? true : false)
     const [todoCheck, setTodoCheck] = useState(false)
     const [editDropdownState, setEditDropdownState] = useState(false)
@@ -108,6 +108,7 @@ export default function TaskItem(props) {
     }, [props])
 
     useEffect(() => {
+        console.log(last_checked_diff)
         if (last_checked_diff > 1 && props.type === "habbit") {
             axios.patch(`/api/user/${searchParams.get("id")}/habbit/${props.data._id}`, {
                 last_checked: props.data.last_check,
