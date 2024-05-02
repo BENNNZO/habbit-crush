@@ -96,7 +96,7 @@ export default function HabbitCheck(props) {
             <div className="w-full h-px bg-white/20 my-1"></div>
             {props.type === "habbit" ? (
                 <div className="flex flex-row gap-5 items-center justify-between w-full">
-                    <div className={`px-2 py-1 ${true ? 'bg-green-500 text-green-900' : 'bg-red-500 text-red-900'} font-semibold rounded-md shadow-md`}>100 Days</div>
+                    <div className={`px-2 py-1 bg-green-500 text-green-900 font-semibold rounded-md shadow-md`}>100 Days</div>
                         <img className="h-6" src={DiamondIcon.src} alt="flame icon" />
                     <div className="flex flex-row bg-orange-500 text-orange-900 px-2 py-1 rounded-md font-semibold items-center justify-center shadow-md">
                         <img className="h-6" src={FlameIcon.src} alt="flame icon" />

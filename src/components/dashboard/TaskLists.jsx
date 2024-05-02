@@ -1,3 +1,5 @@
+import TaskListsSkeleton from "./TaskListsSkeleton"
+
 import TaskItem from "@/components/dashboard/TaskItem"
 import PlusIcon from "@/assets/svg/plus.svg"
 
@@ -31,30 +33,36 @@ export default function TaskLists(props) {
     // there has to be a better way of compressing this i just can be bothered right now
     return (
         <section className="flex flex-row gap-10">
-            <div className="flex flex-col gap-2 w-64">
-                {title("Good Habbits")}
-                {props.data.habbitData?.map((e, i) => {
-                    if (e.type) {
-                        return <TaskItem data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
-                    }
-                })}
-            </div>
-            <div className="flex flex-col gap-2 w-64">
-                {title("Bad Habbits")}
-                {props.data.habbitData?.map((e, i) => {
-                    if (!e.type) {
-                        return <TaskItem data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
-                    }
-                })}
-            </div>
-            <div className="flex flex-col gap-2 w-64">
-                {title("Todo List")}
-                {props.data.todoData?.map((e, i) => {
-                    if (!e.type) {
-                        return <TaskItem data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} />
-                    }
-                })}
-            </div>
+            {props.data.habbitData === null  || props.data.todoData === null ? (
+                <TaskListsSkeleton />
+            ) : (
+                <>
+                    <div className="flex flex-col gap-2 w-64">
+                        {title("Good Habbits")}
+                        {props.data.habbitData?.map((e, i) => {
+                            if (e.type) {
+                                return <TaskItem data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                            }
+                        })}
+                    </div>
+                    <div className="flex flex-col gap-2 w-64">
+                        {title("Bad Habbits")}
+                        {props.data.habbitData?.map((e, i) => {
+                            if (!e.type) {
+                                return <TaskItem data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                            }
+                        })}
+                    </div>
+                    <div className="flex flex-col gap-2 w-64">
+                        {title("Todo List")}
+                        {props.data.todoData?.map((e, i) => {
+                            if (!e.type) {
+                                return <TaskItem data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                            }
+                        })}
+                    </div>
+                </>
+            )}
         </section>
     )
 }
