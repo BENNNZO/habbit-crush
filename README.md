@@ -1,9 +1,9 @@
 # things todo file
 
 ## todo
-- polish tasks
-- add todo modal
-- add todo model (link to user)
+- ~~polish tasks~~
+- ~~add todo modal~~
+- ~~add todo model (link to user)~~
 
 ## random ideas
 - possible app that not only help break habbits but helps create new ones

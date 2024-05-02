@@ -38,7 +38,7 @@ export default function TaskModal(props) {
 
         axios.post(`/api/user/${searchParams.get('id')}/todo`, {
             title: todoTitleRef.current.value,
-            desc: todoDescRef.current.checked
+            desc: todoDescRef.current.value
         })
         .then(res => {
             console.log(res)
@@ -49,7 +49,7 @@ export default function TaskModal(props) {
 
     return (
         <div className="z-50 fixed top-0 left-0 w-screen h-screen backdrop-brightness-50 backdrop-blur-md overflow-hidden grid place-items-center">
-            <div className="bg-accent shadow-md p-2 rounded-md">
+            <div className="bg-accent shadow-md p-2 rounded-md overflow-hidden">
                 <div className="flex flex-row items-center justify-between">
                     <h3 className="font-bold tracking-wide text-xl bg-secondary/50 px-2 rounded-md">CREATE NEW TASK</h3>
                     <button className="bg-secondary/50 p-3 rounded-md shadow-md aspect-square relative" onClick={() => props.setToggle(false)}>
@@ -84,7 +84,7 @@ export default function TaskModal(props) {
                         }</button>
                     </form>
                     <form onSubmit={(e) => submitTodo(e)} className={`flex flex-col justify-between p-2 bg-secondary/50 rounded-md absolute h-full top-0 ${toggleType ? "-right-[110%]" : "right-0"} duration-150`}>
-                        <input className="rounded-md px-2 text-black" type="text" name="habbit" id="habbit-title" ref={todoTitleRef} placeholder="Title..." required autoFocus/>
+                        <input className="rounded-md px-2 text-black" type="text" name="habbit" id="habbit-title" ref={todoTitleRef} placeholder="Title..." required/>
                         <textarea name="todo" id="todo-desc" rows="2" ref={todoDescRef} placeholder="Description... (optional)" className="px-2 rounded-md resize-none text-black"></textarea>
                         <button type="submit" className="button relative h-8">{
                             creating ? (
@@ -99,11 +99,3 @@ export default function TaskModal(props) {
         </div>
     )
 }
-
-// background blur
-// inputs and title 
-
-// button attached to function
-// api call function
-// x button
-// different habbit and todo sections

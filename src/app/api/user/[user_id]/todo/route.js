@@ -1,7 +1,7 @@
 import dbConnect from "@/utils/connectDB"
 
 import User from "@/models/User"
-import Habbit from "@/models/Habbit"
+import Todo from "@/models/Todo"
 
 export async function GET(req, { params }) {
     try {
