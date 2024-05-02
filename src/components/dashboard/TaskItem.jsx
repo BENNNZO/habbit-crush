@@ -104,6 +104,7 @@ export default function TaskItem(props) {
 
     useEffect(() => {
         // this is stupid but it fixes many state caryover issues
+        setTodoCheck(false)
     }, [props])
 
     useEffect(() => {
