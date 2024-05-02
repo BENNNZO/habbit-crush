@@ -81,11 +81,11 @@ export default function HabbitCheck(props) {
     return (
         <div className={`${props.type === "todo" && checked === true ? "hidden" : "flex"} flex-col gap-2 items-start bg-secondary p-3 rounded-md shadow-lg fade-in`}>
             <div className="flex flex-row justify-between w-full items-center gap-5">
-                <div className="flex flex-row gap-2 items-center">
+                <div className="flex flex-row gap-2 items-center w-4/5">
                     <img className="h-6 invert p-1 bg-black/20 rounded-md cursor-pointer hover:bg-black/30 duration-100" src={PencilIcon.src} alt="flame icon" />
                     <p className="font-bold drop-shadow-md whitespace-nowrap overflow-hidden overflow-ellipsis">{props.data.title[0].toUpperCase() + props.data.title.substr(1).toLowerCase()}</p>
                 </div>
-                <button ref={location} className={`h-6 p-1 aspect-square rounded-md ${checked ? 'text-green-900 bg-green-500' : 'text-black bg-white'} font-bold relative shadow-md`} onClick={() => check()}>
+                <button ref={location} className={`h-6 p-1 aspect-square rounded-md ${checked ? 'text-green-900 bg-green-500' : 'text-black bg-white'} font-bold shadow-md`} onClick={() => check()}>
                     {checked ? (
                         <p className="relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fade-in">✓</p>
                     ) : (
