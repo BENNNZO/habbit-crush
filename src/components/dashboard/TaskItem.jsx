@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
@@ -6,10 +6,10 @@ import confetti from "canvas-confetti"
 import moment from "moment"
 import axios, { spread } from "axios"
 
-import FlameIcon from '@/assets/svg/flame.svg'
-import Checkmark from '@/assets/svg/checkmark.svg'
-import DiamondIcon from '@/assets/svg/diamond-outline.svg'
-import PencilIcon from '@/assets/svg/pencil.svg'
+import FlameIcon from "@/assets/svg/flame.svg"
+import Checkmark from "@/assets/svg/checkmark.svg"
+import DiamondIcon from "@/assets/svg/diamond-outline.svg"
+import PencilIcon from "@/assets/svg/pencil.svg"
 
 // TODO: add delete / edit button to habbits & todo
 
@@ -63,14 +63,12 @@ export default function TaskItem(props) {
     }
 
     function check() {
-        console.log(moment(Date.now() + (1000 * 60 * 60 * 26)).diff(new Date(props.data.last_check), "days"))
-
         if (props.type === "habbit") {
             if (!checked) {
                 fireConfetti()
                 setChecked(true)
 
-                axios.patch(`/api/user/${searchParams.get('id')}/habbit/${props.data._id}`, {
+                axios.patch(`/api/user/${searchParams.get("id")}/habbit/${props.data._id}`, {
                     last_checked: Date.now(),
                     streak: props.data.streak + 1
                 })
@@ -82,7 +80,7 @@ export default function TaskItem(props) {
         } else if (props.type === "todo") {
             fireConfetti()
             setChecked(true)
-            axios.delete(`/api/user/${searchParams.get('id')}/todo/${props.data._id}`)
+            axios.delete(`/api/user/${searchParams.get("id")}/todo/${props.data._id}`)
             .catch(err => console.log(err))
             .finally(() => {
                 props.reload()
@@ -97,7 +95,7 @@ export default function TaskItem(props) {
     useEffect(() => {
         console.log(last_checked_diff)
         if (last_checked_diff > 1) {
-            axios.patch(`/api/user/${searchParams.get('id')}/habbit/${props.data._id}`, {
+            axios.patch(`/api/user/${searchParams.get("id")}/habbit/${props.data._id}`, {
                 last_checked: props.data.last_check,
                 streak: 0
             })
@@ -115,11 +113,11 @@ export default function TaskItem(props) {
                     <img className="h-6 invert p-1 bg-black/20 rounded-md cursor-pointer hover:bg-black/30 duration-100" src={PencilIcon.src} alt="flame icon" />
                     <p className="font-bold drop-shadow-md whitespace-nowrap overflow-hidden overflow-ellipsis">{props.data.title[0].toUpperCase() + props.data.title.substr(1).toLowerCase()}</p>
                 </div>
-                <button ref={location} className={`h-6 p-1 aspect-square rounded-md ${checked ? 'text-green-900 bg-green-500' : 'text-black bg-white'} font-bold shadow-md`} onClick={() => check()}>
+                <button ref={location} className={`h-6 p-1 aspect-square rounded-md ${checked ? "text-green-900 bg-green-500" : "text-black bg-white"} font-bold shadow-md`} onClick={() => check()}>
                     {checked ? (
                         <p className="relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fade-in">✓</p>
                     ) : (
-                        ''
+                        ""
                     )}
                 </button>
             </div>
@@ -128,8 +126,8 @@ export default function TaskItem(props) {
                 <div className="flex flex-row gap-5 items-center justify-between w-full">
                     <div className={`px-2 py-1 bg-green-500 text-green-900 font-semibold rounded-md shadow-md`}>100 Days</div>
                         <img className="h-6" src={DiamondIcon.src} alt="flame icon" />
-                    <div className="flex flex-row bg-orange-500 text-orange-900 px-2 py-1 rounded-md font-semibold items-center justify-center shadow-md">
-                        <img className="h-6" src={FlameIcon.src} alt="flame icon" />
+                    <div className={`flex flex-row ${props.data.streak === 0 ? "bg-zinc-500 text-zinc-900" : "bg-orange-500 text-orange-900"} px-2 py-1 rounded-md font-semibold items-center justify-center shadow-md duration-300`}>
+                        <img className={`h-6 duration-300 ${props.data.streak === 0 ? "grayscale" : ""}`} src={FlameIcon.src} alt="flame icon" />
                         <p>{props.data.streak}</p>
                     </div>
                 </div>
