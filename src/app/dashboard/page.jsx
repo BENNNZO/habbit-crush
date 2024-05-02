@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-import HabbitList from "@/components/dashboard/HabbitList"
+import HabbitList from "@/components/dashboard/TaskLists"
 import TaskModal from "@/components/dashboard/TaskModal"
 
 export default function Dashboard() {
