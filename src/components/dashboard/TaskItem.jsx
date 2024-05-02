@@ -2,19 +2,20 @@
 
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
+import confetti from "canvas-confetti"
 import moment from "moment"
-import axios from "axios"
+import axios, { spread } from "axios"
 
 import FlameIcon from '@/assets/svg/flame.svg'
 import Checkmark from '@/assets/svg/checkmark.svg'
-import confetti from "canvas-confetti"
+import DiamondIcon from '@/assets/svg/diamond-outline.svg'
+import PencilIcon from '@/assets/svg/pencil.svg'
 
-// TODO: add delete button to habbits & todo
+// TODO: add delete / edit button to habbits & todo
 
 export default function HabbitCheck(props) {
     const searchParams = useSearchParams()
     
-    // const [duration, setDuration] = useState(moment.duration(Date.now() - last_check).asDays())
     const [checked, setChecked] = useState(false)
     
     const location = useRef(null)
@@ -78,28 +79,32 @@ export default function HabbitCheck(props) {
     }
 
     return (
-        <div className={`${props.type === "todo" && checked === true ? "hidden" : "flex"} flex-col gap-2 items-start bg-secondary p-3 rounded-md shadow-lg`}>
+        <div className={`${props.type === "todo" && checked === true ? "hidden" : "flex"} flex-col gap-2 items-start bg-secondary p-3 rounded-md shadow-lg fade-in`}>
             <div className="flex flex-row justify-between w-full items-center gap-5">
-                <p className="font-bold drop-shadow-md whitespace-nowrap overflow-hidden overflow-ellipsis">{props.data.title[0].toUpperCase() + props.data.title.substr(1).toLowerCase()}</p>
-                <button ref={location} className={`p-3 rounded-md ${checked ? 'text-green-900 bg-green-500' : 'text-black bg-white'} font-bold relative shadow-md`} onClick={() => check()}>
+                <div className="flex flex-row gap-2 items-center">
+                    <img className="h-6 invert p-1 bg-black/20 rounded-md cursor-pointer hover:bg-black/30 duration-100" src={PencilIcon.src} alt="flame icon" />
+                    <p className="font-bold drop-shadow-md whitespace-nowrap overflow-hidden overflow-ellipsis">{props.data.title[0].toUpperCase() + props.data.title.substr(1).toLowerCase()}</p>
+                </div>
+                <button ref={location} className={`h-6 p-1 aspect-square rounded-md ${checked ? 'text-green-900 bg-green-500' : 'text-black bg-white'} font-bold relative shadow-md`} onClick={() => check()}>
                     {checked ? (
-                        <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">✓</p>
+                        <p className="relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fade-in">✓</p>
                     ) : (
                         ''
                     )}
                 </button>
             </div>
+            <div className="w-full h-px bg-white/20 my-1"></div>
             {props.type === "habbit" ? (
-                <div>habbit world!</div>
-                // <div className="flex flex-row gap-5 items-center justify-between w-full">
-                //     <div className={`px-2 py-1 ${duration < 1 ? 'bg-green-500 text-green-900' : 'bg-red-500 text-red-900'} font-semibold rounded-md shadow-md`}>{Math.round(duration * 100) / 100} Days</div>
-                //     <div className="flex flex-row bg-orange-500 text-orange-900 px-2 py-1 rounded-md font-semibold items-center justify-center shadow-md">
-                //         <img className="h-6" src={FlameIcon.src} alt="flame icon" />
-                //         <p>{streak}</p>
-                //     </div>
-                // </div>
+                <div className="flex flex-row gap-5 items-center justify-between w-full">
+                    <div className={`px-2 py-1 ${true ? 'bg-green-500 text-green-900' : 'bg-red-500 text-red-900'} font-semibold rounded-md shadow-md`}>100 Days</div>
+                        <img className="h-6" src={DiamondIcon.src} alt="flame icon" />
+                    <div className="flex flex-row bg-orange-500 text-orange-900 px-2 py-1 rounded-md font-semibold items-center justify-center shadow-md">
+                        <img className="h-6" src={FlameIcon.src} alt="flame icon" />
+                        <p>{props.data.streak}</p>
+                    </div>
+                </div>
             ) : (
-                <div>hello, world!</div>
+                <p>{props.data.desc}</p>
             )}
         </div>
     )

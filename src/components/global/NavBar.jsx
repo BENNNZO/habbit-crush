@@ -20,19 +20,19 @@ export default function NavBar() {
                 {
                     session ? (
                         <>
-                            <li className="button">
+                            <li className="button fade-in">
                                 <button onClick={() => push('/add-habbit')}>ADD HABBIT</button>
                             </li>
-                            <li className="button-secondary">
+                            <li className="button-secondary fade-in">
                                 <button onClick={() => push(`/dashboard?id=${session?.user.id}`)}>DASHBOARD</button>
                             </li>
-                            <li className="relative" onClick={() => setAccount(e => !e)}>
+                            <li className="relative fade-in" onClick={() => setAccount(e => !e)}>
                                 <img className="h-10 aspect-square cursor-pointer rounded-md leading-4" src={session?.user.image} alt="prof pic" />
                                 {
                                     account ? (
                                         <>
                                             <div className="fixed w-full h-full top-0 left-0"></div>
-                                            <ul className="rounded-md absolute top-full right-0 mt-2 bg-secondary flex flex-col overflow-hidden font-semibold">
+                                            <ul className="pop-in rounded-md absolute top-full right-0 mt-2 bg-secondary flex flex-col overflow-hidden font-semibold">
                                                 <li className="px-4 py-2 hover:bg-accent duration-100 whitespace-nowrap cursor-pointer" onClick={() => push(`/profile`)}>
                                                     <button>Profile</button>
                                                 </li>
@@ -47,10 +47,10 @@ export default function NavBar() {
                         </>
                     ) : session === null ? (
                         <>
-                            <li className="button">
+                            <li className="button fade-in">
                                 <a href="/auth/sign-in">SIGN IN</a>
                             </li>
-                            <li className="button">
+                            <li className="button fade-in">
                                 <a href="/pricing">PRICING</a>
                             </li>
                         </>

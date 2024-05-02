@@ -50,8 +50,8 @@ export default function TaskModal(props) {
     }
 
     return (
-        <div className="z-50 fixed top-0 left-0 w-screen h-screen backdrop-brightness-50 backdrop-blur-md overflow-hidden grid place-items-center">
-            <div className="bg-accent shadow-md p-2 rounded-md overflow-hidden">
+        <div className="z-50 fixed top-0 left-0 w-screen h-screen backdrop-brightness-50 backdrop-blur-md overflow-hidden grid place-items-center fade-in">
+            <div className="bg-accent shadow-md p-2 rounded-md overflow-hidden pop-in">
                 <div className="flex flex-row items-center justify-between">
                     <h3 className="font-bold tracking-wide text-xl bg-secondary/50 px-2 rounded-md">CREATE NEW TASK</h3>
                     <button className="bg-secondary/50 p-3 rounded-md shadow-md aspect-square relative" onClick={() => props.setModalState(false)}>
