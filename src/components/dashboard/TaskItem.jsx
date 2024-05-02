@@ -13,7 +13,7 @@ import PencilIcon from '@/assets/svg/pencil.svg'
 
 // TODO: add delete / edit button to habbits & todo
 
-export default function HabbitCheck(props) {
+export default function TaskItem(props) {
     const searchParams = useSearchParams()
     
     const [checked, setChecked] = useState(false)
@@ -66,20 +66,22 @@ export default function HabbitCheck(props) {
             if (!checked) {
                 fireConfetti()
                 setChecked(true)
+                props.reload()
             }
         } else if (props.type === "todo") {
             fireConfetti()
             setChecked(true)
             axios.delete(`/api/user/${searchParams.get('id')}/todo/${props.data._id}`)
-            .then(res => {
-
-            })
             .catch(err => console.log(err))
         }
     }
 
+    useEffect(() => {
+        // this is stupid but it fixes many state caryover issues
+    }, [props])
+
     return (
-        <div className={`${props.type === "todo" && checked === true ? "hidden" : "flex"} flex-col gap-2 items-start bg-secondary p-3 rounded-md shadow-lg fade-in`}>
+        <div className={`${props.type === "todo" && checked === true ? "hidden" : "flex"} flex-col ${props.data.desc === "" ? "" : "gap-2"} bg-secondary p-3 rounded-md shadow-lg fade-in`}>
             <div className="flex flex-row justify-between w-full items-center gap-5">
                 <div className="flex flex-row gap-2 items-center w-4/5">
                     <img className="h-6 invert p-1 bg-black/20 rounded-md cursor-pointer hover:bg-black/30 duration-100" src={PencilIcon.src} alt="flame icon" />
@@ -93,7 +95,7 @@ export default function HabbitCheck(props) {
                     )}
                 </button>
             </div>
-            <div className="w-full h-px bg-white/20 my-1"></div>
+            {props.data.desc === "" ? "" : <div className="w-full h-px bg-white/20 my-1"></div>}
             {props.type === "habbit" ? (
                 <div className="flex flex-row gap-5 items-center justify-between w-full">
                     <div className={`px-2 py-1 bg-green-500 text-green-900 font-semibold rounded-md shadow-md`}>100 Days</div>

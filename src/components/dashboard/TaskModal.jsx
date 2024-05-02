@@ -28,9 +28,11 @@ export default function TaskModal(props) {
         .then(res => {
             console.log(res)
             props.setModalState(false)
-            props.reload()
         })
         .catch(err => console.log(err))
+        .finally(() => {
+            props.reload()
+        })
     }
 
     function submitTodo(e) {
@@ -44,9 +46,11 @@ export default function TaskModal(props) {
         .then(res => {
             console.log(res)
             props.setModalState(false)
-            props.reload()
         })
         .catch(err => console.log(err))
+        .finally(() => {
+            props.reload()
+        })
     }
 
     return (
