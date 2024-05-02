@@ -16,7 +16,8 @@ import PencilIcon from '@/assets/svg/pencil.svg'
 export default function TaskItem(props) {
     const searchParams = useSearchParams()
     
-    const [checked, setChecked] = useState(false)
+    let last_checked_diff = moment(Date.now()).diff(new Date(props.data.last_check), "days")
+    const [checked, setChecked] = useState(last_checked_diff === 0 ? true : false)
     
     const location = useRef(null)
 
@@ -62,17 +63,16 @@ export default function TaskItem(props) {
     }
 
     function check() {
+        console.log(moment(Date.now() + (1000 * 60 * 60 * 26)).diff(new Date(props.data.last_check), "days"))
+
         if (props.type === "habbit") {
             if (!checked) {
                 fireConfetti()
                 setChecked(true)
-                
+
                 axios.patch(`/api/user/${searchParams.get('id')}/habbit/${props.data._id}`, {
                     last_checked: Date.now(),
                     streak: props.data.streak + 1
-                })
-                .then(res => {
-                    console.log(res)
                 })
                 .catch(err => console.log(err))
                 .finally(() => {

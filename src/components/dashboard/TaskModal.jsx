@@ -70,8 +70,8 @@ export default function TaskModal(props) {
                 </div>
                 <div className="relative">
                     <form onSubmit={(e) => submitHabbit(e)} className={`flex flex-col gap-2 p-2 bg-secondary/50 rounded-md relative ${toggleType ? "right-0" : "right-[110%]"} duration-150`}>
-                        <input className="rounded-md px-2 text-black" type="text" name="habbit" id="habbit-title" ref={habbitTitleRef} placeholder="Title..." required autoFocus/>
-                        <fieldset className="mt-2">
+                        <input className="rounded-md px-2 text-black py-1" type="text" name="habbit" id="habbit-title" ref={habbitTitleRef} placeholder="Title..." required autoFocus/>
+                        <fieldset>
                             <legend className="font-semibold">Good Or Bad Habbit</legend>
                             <div className="flex flex-row gap-1">
                                 <input ref={habbitTypeRef} type="radio" name="habbit" id="habbit-good" required/>
@@ -90,7 +90,7 @@ export default function TaskModal(props) {
                         }</button>
                     </form>
                     <form onSubmit={(e) => submitTodo(e)} className={`flex flex-col justify-between p-2 bg-secondary/50 rounded-md absolute h-full top-0 ${toggleType ? "-right-[110%]" : "right-0"} duration-150`}>
-                        <input className="rounded-md px-2 text-black" type="text" name="habbit" id="habbit-title" ref={todoTitleRef} placeholder="Title..." required/>
+                        <input className="rounded-md px-2 text-black py-1" type="text" name="habbit" id="habbit-title" ref={todoTitleRef} placeholder="Title..." required/>
                         <textarea name="todo" id="todo-desc" rows="2" ref={todoDescRef} placeholder="Description... (optional)" className="px-2 rounded-md resize-none text-black"></textarea>
                         <button type="submit" className="button relative h-8">{
                             loading ? (
