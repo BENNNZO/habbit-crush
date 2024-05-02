@@ -9,13 +9,22 @@ import PlusIcon from "@/assets/svg/plus.svg"
 
 export default function HabbitList(props) {
     const [habbitData, setHabbitData] = useState(null)
+    const [todoData, setTodoData] = useState(null)
 
     const searchParams = useSearchParams()
 
     useEffect(() => {
+        // get habbits
         axios.get(`/api/user/${searchParams.get('id')}/habbit`)
         .then(res => {
             setHabbitData(res.data.habbits)
+        })
+        .catch(err => console.log(err))
+
+        // get todos
+        axios.get(`/api/user/${searchParams.get('id')}/todo`)
+        .then(res => {
+            setTodoData(res.data.todos)
         })
         .catch(err => console.log(err))
     }, [])
@@ -31,7 +40,7 @@ export default function HabbitList(props) {
                 </div>
                 {habbitData?.map((e, i) => {
                     if (e.type) {
-                        return <TaskItem title={e.title} last_check={e.last_check} streak={e.streak} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                        return <TaskItem data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
                     }
                 })}
             </section>
@@ -45,7 +54,7 @@ export default function HabbitList(props) {
                 {habbitData?.map((e, i) => {
                     console.log(e)
                     if (!e.type) {
-                        return <TaskItem title={e.title} last_check={e.last_check} streak={e.streak} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                        return <TaskItem data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} />
                     }
                 })}
             </section>
@@ -56,10 +65,10 @@ export default function HabbitList(props) {
                         <img src={PlusIcon.src} alt="" />
                     </button>
                 </div>
-                {habbitData?.map((e, i) => {
+                {todoData?.map((e, i) => {
                     console.log(e)
                     if (!e.type) {
-                        return <TaskItem title={e.title} last_check={e.last_check} streak={e.streak} index={i} key={i} setData={(e) => setHabbitData(e)} />
+                        return <TaskItem data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} />
                     }
                 })}
             </section>
