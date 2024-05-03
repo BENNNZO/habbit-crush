@@ -24,27 +24,33 @@ export default function TaskLists(props) {
                 <>
                     <div className="flex flex-col gap-2 w-64">
                         {title("Good Habbits")}
-                        {props.data.habbitData?.map((e, i) => {
-                            if (e.type) {
-                                return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
-                            }
-                        })}
+                        <div className="flex flex-col gap-2 h-[30rem] overflow-y-scroll">
+                            {props.data.habbitData?.map((e, i) => {
+                                if (e.type) {
+                                    return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
+                                }
+                            })}
+                        </div>
                     </div>
                     <div className="flex flex-col gap-2 w-64">
                         {title("Bad Habbits")}
-                        {props.data.habbitData?.map((e, i) => {
-                            if (!e.type) {
-                                return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
-                            }
-                        })}
+                        <div className="flex flex-col gap-2 h-[30rem] overflow-y-scroll">
+                            {props.data.habbitData?.map((e, i) => {
+                                if (!e.type) {
+                                    return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
+                                }
+                            })}
+                        </div>
                     </div>
                     <div className="flex flex-col gap-2 w-64">
                         {title("Todo List")}
-                        {props.data.todoData?.map((e, i) => {
-                            if (!e.type) {
-                                return <TaskItem reload={() => props.reload()} data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
-                            }
-                        })}
+                        <div className="flex flex-col gap-2 h-[30rem] overflow-y-scroll">
+                            {props.data.todoData?.map((e, i) => {
+                                if (!e.type) {
+                                    return <TaskItem reload={() => props.reload()} data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
+                                }
+                            })}
+                        </div>
                     </div>
                 </>
             )}
