@@ -1,6 +1,6 @@
 import TaskListsSkeleton from "./TaskListsSkeleton"
 
-import TaskItem from "@/components/dashboard/TaskItem"
+import TaskItem from "@/components/dashboard/Tasks/TaskItem"
 import PlusIcon from "@/assets/svg/plus.svg"
 
 export default function TaskLists(props) {
@@ -17,14 +17,14 @@ export default function TaskLists(props) {
 
     // there has to be a better way of compressing this i just can be bothered right now
     return (
-        <section className="flex flex-row gap-10">
+        <section className="flex flex-row gap-10 relative">
             {props.data.habbitData === null  || props.data.todoData === null ? (
                 <TaskListsSkeleton />
             ) : (
                 <>
                     <div className="flex flex-col gap-2 w-64">
                         {title("Good Habbits")}
-                        <div className="flex flex-col gap-2 h-[30rem] overflow-y-scroll">
+                        <div className="flex flex-col gap-2 h-[30rem] overflow-y-scroll rounded-md">
                             {props.data.habbitData?.map((e, i) => {
                                 if (e.type) {
                                     return <TaskItem reload={() => props.reload()} data={e} type={"habbit"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
@@ -44,7 +44,7 @@ export default function TaskLists(props) {
                     </div>
                     <div className="flex flex-col gap-2 w-64">
                         {title("Todo List")}
-                        <div className="flex flex-col gap-2 h-[30rem] overflow-y-scroll">
+                        <div className="flex flex-col gap-2 h-[30rem] overflow-y-scroll relative">
                             {props.data.todoData?.map((e, i) => {
                                 if (!e.type) {
                                     return <TaskItem reload={() => props.reload()} data={e} type={"todo"} index={i} key={i} setData={(e) => setHabbitData(e)} setModalEditState={(e) => props.setModalEditState(e)} />
@@ -54,6 +54,7 @@ export default function TaskLists(props) {
                     </div>
                 </>
             )}
+            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-b from-transparent to-background h-4"></div>
         </section>
     )
 }

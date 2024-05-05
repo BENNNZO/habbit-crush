@@ -4,18 +4,18 @@ import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import confetti from "canvas-confetti"
 import moment from "moment"
-import axios, { spread } from "axios"
+import axios from "axios"
 
 import FlameIcon from "@/assets/svg/flame.svg"
-import Checkmark from "@/assets/svg/checkmark.svg"
 import DiamondIcon from "@/assets/svg/diamond-outline.svg"
 import PencilIcon from "@/assets/svg/pencil.svg"
+import TrashIcon from "@/assets/svg/trash.svg"
 
 // TODO: add delete / edit button to habbits & todo
 
 export default function TaskItem(props) {
     const searchParams = useSearchParams()
-    
+
     let last_checked_diff = moment(Date.now()).diff(new Date(props.data.last_check), "days")
     const [checked, setChecked] = useState(last_checked_diff === 0 ? true : false)
     const [todoCheck, setTodoCheck] = useState(false)
@@ -94,6 +94,7 @@ export default function TaskItem(props) {
 
     function deleteTask() {
         setDeleteLoading(true)
+        setEditDropdownState(false)
         axios.delete(`/api/user/${searchParams.get("id")}/${props.type}/${props.data._id}`)
         .catch(err => console.log(err))
         .finally(() => {
@@ -101,11 +102,6 @@ export default function TaskItem(props) {
             props.reload()
         })
     }
-
-    useEffect(() => {
-        // this is stupid but it fixes many state caryover issues
-        setTodoCheck(false)
-    }, [props])
 
     useEffect(() => {
         console.log(last_checked_diff)
@@ -122,26 +118,31 @@ export default function TaskItem(props) {
     }, [])
 
     useEffect(() => {
+        // this is stupid but it fixes many state caryover issues
+        setTodoCheck(false)
+    }, [props])
+
+    useEffect(() => {
         setEditDropdownState(false)
     }, [props.data.title])
 
     return (
-        // <div className={`${props.type === "todo" && todoCheck === true ? "hidden" : "flex"} flex-col ${props.data.desc === "" ? "" : "gap-2"} bg-secondary p-3 rounded-md shadow-lg fade-in`}>
         <div className={`flex flex-col ${props.data.desc === "" ? "" : "gap-2"} bg-secondary p-3 rounded-md shadow-lg fade-in`}>
             <div className="flex flex-row justify-between w-full items-center gap-5">
                 <div className="flex flex-row gap-2 items-center w-4/5 relative">
-                    <img className="h-6 invert p-1 bg-black/20 rounded-md cursor-pointer hover:bg-black/30 duration-100" src={PencilIcon.src} alt="flame icon" onClick={() => setEditDropdownState(e => !e)} />
+                    <img className="h-6 p-1 bg-primary/20 rounded-md cursor-pointer hover:bg-primary/30 duration-100" src={PencilIcon.src} alt="pencil icon" onClick={() => {props.setModalEditState({ id: props.data._id, type: props.type }); setEditDropdownState(false)}}/>
+                    <img className="h-6 p-1 bg-primary/20 rounded-md cursor-pointer hover:bg-primary/30 duration-100" src={TrashIcon.src} alt="trash icon"  onClick={() => deleteTask()}/>
                     <p className="font-bold drop-shadow-md whitespace-nowrap overflow-hidden overflow-ellipsis">{props.data.title[0].toUpperCase() + props.data.title.substr(1).toLowerCase()}</p>
-                    {editDropdownState ? (
-                        <ul className="bg-white rounded-md shadow-md overflow-hidden absolute top-full mt-2 left-0 z-20 text-secondary pop-in">
-                            <li className="px-3 py-1 hover:bg-zinc-100 bg-zinc-200 duration-100 font-semibold cursor-pointer" onClick={() => props.setModalEditState({ id: props.data._id, type: props.type })}>
+                    {/* {editDropdownState ? (
+                        <ul className="bg-white rounded-md shadow-md overflow-hidden absolute top-full left-0 mt-2 z-50 text-secondary pop-in">
+                            <li className="px-3 py-1 hover:bg-zinc-100 bg-zinc-200 duration-100 font-semibold cursor-pointer" onClick={() => {props.setModalEditState({ id: props.data._id, type: props.type }); setEditDropdownState(false)}}>
                                 <button>Edit Title</button>
                             </li>
                             <li className={`px-3 py-1 bg-red-500 text-red-900 font-bold hover:bg-red-400 duration-100 ${deleteLoading ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer pointer-events-auto'}`} onClick={() => deleteTask()}>
                                 <button>{deleteLoading ? "LOADING..." : "Delete Task"}</button>
                             </li>
                         </ul>
-                    ) : ""}
+                    ) : ""} */}
                 </div>
                 <button ref={location} className={`h-6 p-1 aspect-square rounded-md ${(todoCheck && props.type === "todo") || (checked && props.type === "habbit") ? "text-green-900 bg-green-500 cursor-not-allowed" : "text-black bg-white"} font-bold shadow-md`} onClick={() => check()}>
                     {(todoCheck && props.type === "todo") || (checked && props.type === "habbit") ? (
